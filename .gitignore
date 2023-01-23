@@ -2,6 +2,8 @@
 /include
 /.dragonruby
 /samples
+/logs
+/tmp
 changelog-curr.txt
 changelog-prev.txt
 console-logo.png
