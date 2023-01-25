@@ -20,6 +20,7 @@ class Game
       Target.new(grid.h, grid.w),
       Target.new(grid.h, grid.w)
     ]
+    state.score ||= 0
 
     handle_input
     render
@@ -28,6 +29,12 @@ class Game
   def render
     move_fireball
     outputs.sprites << [player, state.fireballs, state.targets]
+    outputs.labels << {
+      x: 40,
+      y: grid.h - 40,
+      text: "Score: #{state.score}",
+      size_enum: 4
+    }
   end
 
   ####
@@ -50,6 +57,7 @@ class Game
       y: player.y,
       path: 'sprites/fireball.png'
     }
+    state.score -= 1
   end
 
   def move_fireball
@@ -69,6 +77,7 @@ class Game
 
       target.dead = true
       fireball.dead = true
+      state.score += 2
       state.targets << Target.new(grid.h, grid.w)
     end
   end
