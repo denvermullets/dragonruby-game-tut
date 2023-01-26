@@ -57,7 +57,8 @@ class Game
       y: player.y,
       path: 'sprites/fireball.png'
     }
-    state.score -= 1
+
+    state.score -= state.score.zero? ? 0 : 1
   end
 
   def move_fireball
@@ -65,9 +66,11 @@ class Game
       fireball.x += player.fireball_speed
 
       target_collision(fireball)
-
       state.fireballs.reject!(&:dead)
       state.targets.reject!(&:dead)
+
+      # TODO: investigate why fireball jitters when immediately removed at grid.w, adding pixels helps(?)
+      fireball.x > (grid.w + 200) && fireball.dead = true
     end
   end
 

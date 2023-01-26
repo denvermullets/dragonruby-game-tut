@@ -25,6 +25,9 @@ class Player
       @y += @speed
     end
 
+    player_sprite_index = 0.frame_index(count: 6, hold_for: 8, repeat: true)
+    @path = "sprites/misc/dragon-#{player_sprite_index}.png"
+
     check_boundaries(grid_h, grid_w)
   end
 
